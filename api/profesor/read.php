@@ -42,7 +42,7 @@
     echo json_encode($profesor_arr);
 
   } else {
-    // No Profesors
+    // No Profesori
     echo json_encode(
       array('message' => 'Nu exista Profesori de afisat.')
     );
