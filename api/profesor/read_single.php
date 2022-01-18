@@ -10,7 +10,7 @@
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate blog post object
+  // Instantiate Profesor object
   $profesor = new Profesor($db);
 
   // Get ID

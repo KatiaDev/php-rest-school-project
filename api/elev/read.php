@@ -4,46 +4,48 @@
   header('Content-Type: application/json');
 
   include_once '../../config/Database.php';
-  include_once '../../models/Profesor.php';
+  include_once '../../models/Elev.php';
 
   // Instantiate DB & connect
   $database = new Database();
   $db = $database->connect();
 
-  // Instantiate Profesor object
-  $profesor = new Profesor($db);
+  // Instantiate Elev object
+  $elev = new Elev($db);
 
-  // Profesor query
-  $result = $profesor->read();
+  // Elev query
+  $result = $elev->read();
   // Get row count
   $num = $result->rowCount();
 
-  // Check if any Profesori exist
+  // Check if any Elevi exist
   if($num > 0) {
-    // Profesori array
-    $profesor_arr = array();
+    // Elevi array
+    $elevi_arr = array();
     
 
     while($row = $result->fetch(PDO::FETCH_ASSOC)) {
       extract($row);
 
-      $profesor_item = array(
-        'id' => $profesor_id,
+      $elev_item = array(
+        'id' => $elev_id,
         'nume' => $nume,
-        'prenume' => $prenume
+        'prenume' => $prenume,
+        'email' => $email,
+        'clasa_id' => $clasa_id
       );
 
       // Push to "data"
-      array_push($profesor_arr, $profesor_item);
+      array_push($elevi_arr,  $elev_item);
      
     }
 
     // Turn to JSON & output
-    echo json_encode($profesor_arr);
+    echo json_encode($elevi_arr);
 
   } else {
-    // No Profesori
+    // No Elevi
     echo json_encode(
-      array('message' => 'Nu exista Profesori de afisat.')
+      array('message' => 'Nu exista Elevi de afisat.')
     );
   }
